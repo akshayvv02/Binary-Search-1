@@ -14,25 +14,34 @@
 
 class Solution {
     public int search(ArrayReader reader, int target) {
-        int l = 0; int h = 1;
-        while(reader.get(h) < target){
+        int l = 0;
+        int h = 1;
+        // Expand the search range exponentially until reader.get(h) >= target
+        while (reader.get(h) < target) {
             l = h;
             h = 2 * h;
         }
         return binarySearch(reader, target, l, h);
     }
 
-    public int binarySearch(ArrayReader reader, int target, int l, int r){
-        while(l <= r){
+    public int binarySearch(ArrayReader reader, int target, int l, int r) {
+        while (l <= r) {
             int mid = l + (r - l) / 2;
-            if(reader.get(mid) == target){
+            // If target is found at mid
+            if (reader.get(mid) == target) {
                 return mid;
-            } else if (reader.get(mid) > target){
+            }
+            // If value at mid is greater than target, search left half
+            else if (reader.get(mid) > target) {
                 r = mid - 1;
-            } else {
+            }
+            // If value at mid is less than target, search right half
+            else {
                 l = mid + 1;
             }
         }
+        // Target not found
         return -1;
     }
 }
+
