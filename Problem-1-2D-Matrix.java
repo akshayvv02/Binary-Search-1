@@ -7,7 +7,7 @@
  * - binarySearch(): maps 1D index to 2D using (row = mid / n, col = mid % n),
  *   compares with target, and moves search space left or right accordingly.
  */
-// Time Complexity : O(log n)
+// Time Complexity : O(log(m * n))
 // Space Complexity : O(1)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
