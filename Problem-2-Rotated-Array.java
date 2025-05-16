@@ -15,31 +15,41 @@
 
 class Solution {
     public int search(int[] nums, int target) {
-        if(nums.length == 1){
-            if(nums[0] == target)
+        // If there's only one element, check it directly
+        if (nums.length == 1) {
+            if (nums[0] == target)
                 return 0;
             return -1;
         }
-        int l = 0;
-        int r = nums.length-1;
-        while(l<=r){
-            int mid = (l+r)/2;
-            if(nums[mid] == target)
-                return mid;
-           if(nums[mid] >= nums[l]){
-            if(nums[mid]>target && nums[l]<=target)
-                r = mid -1;
-            else
-                l = mid + 1;
-           }
-           else{
-            if(nums[mid]<target && nums[r]>=target)
-                l = mid + 1;
-            else
-                r = mid - 1;
-           }
 
+        int l = 0;
+        int r = nums.length - 1;
+
+        while (l <= r) {
+            int mid = (l + r) / 2;
+
+            // If target is found at mid
+            if (nums[mid] == target)
+                return mid;
+
+            // If left half is sorted
+            if (nums[mid] >= nums[l]) {
+                // Check if target lies in the left half
+                if (nums[mid] > target && nums[l] <= target)
+                    r = mid - 1; // move left
+                else
+                    l = mid + 1; // move right
+            } else {
+                // Right half is sorted
+                // Check if target lies in the right half
+                if (nums[mid] < target && nums[r] >= target)
+                    l = mid + 1; // move right
+                else
+                    r = mid - 1; // move left
+            }
         }
+
+        // Target not found
         return -1;
-    } 
+    }
 }
